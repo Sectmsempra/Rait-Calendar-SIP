@@ -1,0 +1,341 @@
+
+
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <title>Calendar</title>
+    <meta name="description" content="Calendar">
+    <meta name="author" content="Charles Anderson">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+
+
+
+  
+  <link rel = "stylesheet" href = "{% static 'momoj/css/try.css' %}">
+  <link rel = "stylesheet" href = "{% static 'momoj/css/events.css' %}">
+  <link rel = "stylesheet" href = "{% static 'momoj/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'momoj/css/normalize.css' %}">
+    <script type="text/javascript" src="{% static 'momoj/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'momoj/js/modernizr-2.6.2.min.js' %}"></script>
+
+     <script>
+       var all_events = [];
+     </script>
+    <script type="text/javascript" src="{% static 'momoj/js/try.js' %}"></script>
+     <script type="text/javascript" src="{% static 'momoj/js/test.js' %}"></script>
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  
+ <style>
+   #header {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: #580511;
+    color: rgb(255, 255, 255);
+    overflow: hidden;
+          }
+ </style> 
+
+
+     
+    </head>
+
+    <body class="demo">
+
+      <header class="entry-header">
+        
+        
+      </header>
+      <!-- Demo content -->			
+      <div id="demo-content">
+        
+        
+    
+        <div id="loader-wrapper">
+          
+          <div id="loader"></div>
+          <div class="loader-section section-left"></div>
+            
+            <div class="loader-section section-right"></div>
+     
+        </div>
+          
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <style>.bg-dark {
+        background-color: rgb(29, 2, 2)!important;
+      }
+      .btn-success {
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border-color: #dd1212;
+    
+    }
+        </style>
+      <a class="navbar-brand" href="/"><img src="{% static 'images/RAIT LOGO WHITE.png' %}" alt="Logo" width="120px" height="45px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <!-- <li class="nav-item {% block homeactive %}  {% endblock homeactive %}">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li> -->
+          <li class="nav-item {% block aboutactive %}  {% endblock aboutactive %}" >
+            <a class="nav-link" href="/about">About us</a>
+          </li>
+          <li class="nav-item {% block contactactive %}  {% endblock contactactive %} ">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
+             <ul class="navbar-nav mr-2">
+             <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href='#' id="navbarDropdown1" role="button" data-toggle="dropdown">Branches</a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       <a class="dropdown-item" href="/cs">CS</a>
+                       <a class="dropdown-item" href="/it">IT</a>
+                       <a class="dropdown-item" href="/extc">EXTC</a>
+                       <a class="dropdown-item" href="/instru">INSTRU</a>
+
+
+                     </div>
+                   </li>
+                   </ul>
+
+             <ul class="navbar-nav mr-2">
+             <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href='#' id="navbarDropdown2" role="button" data-toggle="dropdown">Committies</a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       <a class="dropdown-item" href="/kalaraag">KALARAAG</a>
+                       <a class="dropdown-item" href="/suc">SUC</a>
+                       <a class="dropdown-item" href="/">IEEE</a>
+                       <a class="dropdown-item" href="/">TPC</a>
+                       <a class="dropdown-item" href="/acm">ACM</a>
+                       <a class="dropdown-item" href="/">ISTE</a>
+                       <a class="dropdown-item" href="/gdsc">GDSC</a>
+                       <a class="dropdown-item" href="/">CSI</a>
+
+
+                     </div>
+                   </li>
+                   </ul>
+
+          <!-- <li class="nav-item {% block blogactive %}  {% endblock blogactive %} ">
+            <a class="nav-link" href="/blog">Blog</a>
+          </li> -->
+          
+        </ul>
+        <form method="get" action="/search"class="form-inline my-2 my-lg-0 mx-3">
+          <a href="/admin" role="button" target="_blank" class="btn btn-outline-success m-2 my-sm-0"> Add Event </a>
+        </form>
+
+             <!-- Button to  trigger SignUp modal -->
+
+             {% if user.is_authenticated %}
+             <ul class="navbar-nav mr-2">
+             <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome {{request.user}}</a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       <a class="dropdown-item" href="/logout">Logout</a>
+             
+                     </div>
+                   </li>
+                   </ul>
+                   </div>
+             {% else %}
+
+
+<!-- Button to  trigger Login modal -->
+<button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#loginModal">
+Login
+</button>
+
+<button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#signupModal">
+SignUp
+</button>
+{% endif %}
+
+      </div>
+    </nav>
+    {% for message in messages  %}            
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          <strong>Message : </strong> {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    {% endfor %}
+  
+
+
+    <div class="content">
+      <div class="calendar-container col-sm-6">
+        <div class="calendar">
+          <div class="year-header">
+            <span class="left-button" id="prev"> &lang; </span>
+            <span class="year" id="label"></span>
+            <span class="right-button" id="next"> &rang; </span>
+          </div>
+          <table class="months-table">
+            <tbody>
+              <tr class="months-row">
+                <td class="month">Jan</td>
+                <td class="month">Feb</td>
+                <td class="month">Mar</td>
+                <td class="month">Apr</td>
+                <td class="month">May</td>
+                <td class="month">Jun</td>
+                <td class="month">Jul</td>
+                <td class="month">Aug</td>
+                <td class="month">Sep</td>
+                <td class="month">Oct</td>
+                <td class="month">Nov</td>
+                <td class="month">Dec</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="days-table">
+            <td class="day">Sun</td>
+            <td class="day">Mon</td>
+            <td class="day">Tue</td>
+            <td class="day">Wed</td>
+            <td class="day">Thu</td>
+            <td class="day">Fri</td>
+            <td class="day">Sat</td>
+          </table>
+          <div class="frame">
+            <table class="dates-table">
+                <tbody class="tbody">
+                </tbody>
+            </table>
+          </div>
+          <br><br><br>
+        </div>
+      </div>
+      <div class="events-container col-sm-6">
+      </div>
+         </div>
+      <script>
+
+
+            {% for event in event_list %}
+            {% if event.time %}
+              all_events.push({{event | safe}})
+            {% endif %}
+            {% endfor %}
+
+
+
+
+        </script>
+
+
+
+<!-- SignUp Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="signupModalTitle">SignUp Here</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form action='/signup' method='post'>
+<div class="form-group">
+  <label for="username">Username</label>
+  <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username" required>
+</div>
+<div class="form-group">
+  <label for="fname">First Name</label>
+  <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name" required>
+</div>
+<div class="form-group">
+  <label for="lname">Last Name</label>
+  <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name" required>
+</div>
+<div class="form-group">
+  <label for="email">Email address</label>
+  <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+</div>
+<div class="form-group">
+  <label for="pass1">Choose a password</label>
+  <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password" required>
+</div>
+<div class="form-group">
+  <label for="pass2">Confirm Password</label>
+  <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
+</div>
+
+
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+    {% block body %}  {% endblock body %}
+    
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="loginModalTitle">Login Here</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form action="/login" method="POST">
+
+        {% csrf_token %}
+<div class="form-group">
+  <label for="username">Username</label>
+  <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter your username "required>
+</div>
+<div class="form-group">
+  <label for="pass">Enter your password </label>
+  <input type="password" class="form-control" id="loginpass" name="loginpassword" placeholder="Enter your password "required>
+</div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    </div>
+     <div class="modal-footer">
+    </div>
+      </div>
+	<!-- /Demo content -->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script type="text/javascript" src="{% static "jquery-1.9.1.min.js" %}"><\/script>')</script>
+  <script type="text/javascript" src="{% static 'momoj/js/main.js' %}"></script> -->
+
+
+        <!-- Optional JavaScript
+   jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+  </body>
+  </html>

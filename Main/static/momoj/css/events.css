@@ -1,0 +1,21 @@
+
+
+.content{
+    width: auto;
+    padding: auto;
+    height: 100%;
+    position: relative;
+    margin: auto;
+    background: linear-gradient(to bottom right, Black, #ff3939);  
+    /* (to bottom right, #ff8d8d, #3cf1e2) */
+}
+
+.event-card{
+    background-color: #fff;
+    border-radius: 10px;
+
+}
+
+.bg-dark {
+    background-color: #2b0303!important;
+}
