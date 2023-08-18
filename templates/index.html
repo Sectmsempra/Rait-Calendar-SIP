@@ -17,6 +17,9 @@
   <link rel = "stylesheet" href = "{% static 'momoj/css/events.css' %}">
   <link rel = "stylesheet" href = "{% static 'momoj/css/main.css' %}">
   <link rel="stylesheet" href="{% static 'momoj/css/normalize.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
     <script type="text/javascript" src="{% static 'momoj/js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'momoj/js/modernizr-2.6.2.min.js' %}"></script>
 
@@ -42,7 +45,69 @@
     color: rgb(255, 255, 255);
     overflow: hidden;
           }
- </style> 
+
+    .days-table, .dates-table, .months-table {
+      width: 100%;
+      }
+
+    .event-name {
+      font-family: 'Manrope', sans-serif;
+      text-align: center;
+}
+
+.event-count {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2rem;
+}
+
+.event-desc {
+  font-family: 'Manrope', sans-serif;
+      font-size: 0.8rem;
+      text-align: center;
+}
+
+  @media only screen and (max-width: 600px) {
+  .month{
+    padding: 18px 3px;
+    font-size: 12px;
+    margin-left: 1rem ;
+    margin-right: 1rem ;
+  }
+
+  .day{
+    padding: 0.4rem;
+  }
+  .table-date{
+    padding: 0.8rem;
+}
+
+.events-container {
+  background: linear-gradient(to bottom right, Black, #ff3939);  
+  padding: 1.5rem;
+}
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+ height: 32rem;
+}
+body{
+  background-color: black;
+}
+.bg-dark {
+    background-color: #210b0b!important;
+}
+  .btn-success {
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border-color: #dd1212;
+    
+    }
+
+    .content {
+    border: none;
+    padding: 0px 0;
+    }
+  
+  </style> 
 
 
      
@@ -68,17 +133,8 @@
      
         </div>
           
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <style>.bg-dark {
-        background-color: rgb(29, 2, 2)!important;
-      }
-      .btn-success {
-    color: rgb(0, 0, 0);
-    background-color: #ffffff;
-    border-color: #dd1212;
-    
-    }
-        </style>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #38010a;">
+      
       <a class="navbar-brand" href="/"><img src="{% static 'images/RAIT LOGO WHITE.png' %}" alt="Logo" width="120px" height="45px"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -107,10 +163,8 @@
 
                      </div>
                    </li>
-                   </ul>
 
-             <ul class="navbar-nav mr-2">
-             <li class="nav-item dropdown">
+                   <li class="nav-item dropdown">
              <a class="nav-link dropdown-toggle" href='#' id="navbarDropdown2" role="button" data-toggle="dropdown">Committies</a>
              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                        <a class="dropdown-item" href="/kalaraag">KALARAAG</a>
@@ -127,9 +181,11 @@
                    </li>
                    </ul>
 
-          <!-- <li class="nav-item {% block blogactive %}  {% endblock blogactive %} ">
+             
+
+         <li class="nav-item {% block blogactive %}  {% endblock blogactive %} ">
             <a class="nav-link" href="/blog">Blog</a>
-          </li> -->
+          </li> 
           
         </ul>
         <form method="get" action="/search"class="form-inline my-2 my-lg-0 mx-3">
@@ -226,11 +282,11 @@ SignUp
       <script>
 
 
-            {% for event in event_list %}
+            /* {% for event in event_list %}
             {% if event.time %}
               all_events.push({{event | safe}})
             {% endif %}
-            {% endfor %}
+            {% endfor %} */
 
 
 

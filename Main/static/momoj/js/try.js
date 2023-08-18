@@ -191,7 +191,7 @@ function show_events(events, month, day) {
             var event_card = $("<div class='event-card'></div>");
             var event_name = $("<div class='event-name'>"+events[i]["name"]+":</div>");
             const temp_time = new Date(events[i]["time"])
-            var event_count = $("<div class='event-count'>"+temp_time.getHours() + ":"+ temp_time.getMinutes() +" is the timing for this event</div>");
+            var event_count = $("<div class='event-count'>"+temp_time.getHours() + ":"+ temp_time.getMinutes());
             var event_desc = $("<div class='event-desc'>"+events[i]["desc"]+ "</div>");
             if(events[i]["cancelled"]===true) {
                 $(event_card).css({
